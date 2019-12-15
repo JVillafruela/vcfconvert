@@ -69,7 +69,7 @@ class vcard_convert extends Contact_Vcard_Parse
 	/**
 	 * Constructor taking a list of converter properties
 	 */
-	function vcard_convert($p = array())
+	function __construct($p = array())
 	{
 		foreach ($p as $prop => $value)
 			$this->$prop = $value;
@@ -394,6 +394,7 @@ class vcard_convert extends Contact_Vcard_Parse
 	{
 		foreach($node as $tel)
 		{
+			$tel['param']['TYPE']=str_replace('"','',$tel['param']['TYPE']); //MMM
 			if (in_array_nc("PAGER", $tel['param']['TYPE']))
 				$vcard->pager = $tel['value'][0][0];
 			else if (in_array_nc("CELL", $tel['param']['TYPE']))
