@@ -34,7 +34,7 @@ td.label {
   color: #999999;
 }
 
-.error {
+#error {
   color: #cc0000;
 }
 
@@ -105,11 +105,16 @@ function set_form_fields(elem)
   rootdnrow.style.display = dn.disabled ? 'none' : (document.all && !window.opera ? 'block' : 'table-row');
 }
 
+function submit_form() {
+  document.getElementById('error').innerHTML="";
+  document.getElementById('convert').submit();
+}
+
 </script>
 </head>
 <body>
 
-<form method="post" action="index.php" enctype="multipart/form-data">
+<form id="convert" method="post" action="index.php" enctype="multipart/form-data">
 
 <table border="0" cellspacing="0" cellpadding="0"><tr>
 
@@ -121,12 +126,7 @@ function set_form_fields(elem)
 <p>Preferred to export Apple's Address Book to Mozilla Thunderbird.<br />
 <span class="hint">Simply drag all contacts from the Address Book to your desktop and upload the created vCard file.</span></p>
 
-<?php
-
-if (!empty($GLOBALS['error_msg']))
-  print '<p class="error">'.$GLOBALS['error_msg']."</p>\n";
-
-?>
+<p id="error"><?php print $GLOBALS['error_msg']; ?></p>
 
 <table border="0" cellspacing="1" cellpadding="2"><tr>
 
@@ -200,7 +200,7 @@ if (!empty($GLOBALS['error_msg']))
 </tr><tr>
 
 <td></td>
-<td><br><input type="submit" value="convert"></td>
+<td><br><input type="button" value="convert"  onclick="submit_form()" ></td>
 
 </tr></table>
 </form>

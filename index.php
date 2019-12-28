@@ -46,6 +46,7 @@
 require_once('vcard_convert.php');
 require_once('utils.php');
 
+$GLOBALS['error_msg']=''; 
 
 if (!empty($_FILES['_vcards']))
 {
