@@ -64,6 +64,7 @@ class vcard_convert extends Contact_Vcard_Parse
 	var $mailonly = false;
 	var $phoneonly = false;
 	var $accesscode = null;
+	var $mobilephone = false; // Anne
 	
 	
 	/**
@@ -272,7 +273,13 @@ class vcard_convert extends Contact_Vcard_Parse
 			if (is_array($card['PHOTO'][0]))
 				$vcard->photo = array('data' => $card['PHOTO'][0]['value'][0][0], 'encoding' => $card['PHOTO'][0]['param']['ENCODING'][0], 'type' => $card['PHOTO'][0]['param']['TYPE'][0]);
 
-			$vcard->categories = join(',', (array)$card['CATEGORIES'][0]['value'][0]);
+			// Anne : La catégorie avec le vcard qui vient de nextcloud c'est : CATEGORIES 
+			// La catégorie avec le vcard qui vient du smartphone c'est : X-GROUP-MEMBERSHIP 
+            if ($this->mobilephone) {
+                $vcard->categories = join(',', (array)$card['X-GROUP-MEMBERSHIP'][0]['value'][0]);
+            } else {
+                $vcard->categories = join(',', (array)$card['CATEGORIES'][0]['value'][0]);
+            }
 
 			$this->cards[] = $vcard;
 			}

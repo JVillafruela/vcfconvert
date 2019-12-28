@@ -54,6 +54,7 @@ if (!empty($_FILES['_vcards']))
 		'mailonly' => !empty($_POST['_mailonly']),
 		'phoneonly' => !empty($_POST['_phoneonly']),
 		'accesscode' => preg_replace('/[^1-9]/', '', $_POST['_accesscode']),
+		'mobilephone' => !empty($_POST['_mobilephone']),  // Anne 		
 	));
 	
 	// check for errors
